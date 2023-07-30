@@ -1,0 +1,38 @@
+{% extends 'menu.html' %}
+
+{% block contenido %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-primary"> Modificar cliente</button>
+    </form>
+
+{% endblock %}
+
+{#{% extends 'menu.html' %}#}
+{##}
+{#{% block contenido %}#}
+{##}
+{##}
+{#    <div class="container">#}
+{#        <div class="row justify-content-center">#}
+{#            <div class="col-8">#}
+{##}
+{#                    <h2 class="mt-2  text-center"> Modificar Cliente </h2>#}
+{##}
+                {#                 <h2 class="card-title text-center"> Crear Persona </h2>#}
+{##}
+{##}
+{#                    <form method="post" class="form-control form-control-sm">#}
+{#                        {% csrf_token %}#}
+{#                        {{ clienteform }}#}
+{#<input type="submit" value="Modificar Cliente" class="btn-primary"/>#}
+{#                    </form>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{##}
+{#{% endblock %}#}

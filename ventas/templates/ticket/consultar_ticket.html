@@ -1,0 +1,49 @@
+{% extends "menu.html" %}
+
+{% block contenido %}
+
+    <h1 style="color: white">consultar Ticket </h1>
+    <a href="{% url 'crear_ticket' %}"> Registrar Nuevo Ticket </a>
+
+
+    <div style="margin-top: 20px;">
+        <form method="post" action="{% url 'buscar_ticket' %}">
+            {% csrf_token %}
+            {% for element in buscar_tickets %}
+                <div>
+                    <label>{{ element.label_tag }}</label>
+                    {{ element }}
+                </div>
+            {% endfor %}
+            <div>
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <button type="submit" formaction="{% url 'exportar_lista_ticket' %}" class="btn btn-primary">Exportar
+                    a PDF
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <table class="table table-dark table-striped table-bordered table-hover">
+        <thead>
+        <th> Fecha</th>
+        <th> Num ticket</th>
+        <th> Precio Unitario</th>
+        <th> Metodo Pago</th>
+        <th> Modificar</th>
+        <th> Eliminar</th>
+        </thead>
+        <tbody>
+          {% for ticket in lista_tickets %}
+            <tr>
+                <td> {{ ticket.fecha_creacion | date }}</td>
+                <td> {{ ticket.numticket }}</td>
+                <td> {{ ticket.precio_unitario }}</td>
+                <td> {{ ticket.metodopago }}</td>
+                <td><a href="{% url 'modificar_ticket' ticket.id %}" class="btn btn-primary" > mod </a></td>
+                <td><a href="{% url 'eliminar_ticket' ticket.id %}" class="btn btn-danger" > elim </a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

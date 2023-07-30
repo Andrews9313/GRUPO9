@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'logoicon.jpg' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dist/css/bootstrap.min.css' %} ">
+    {% load django_htmx %}
+    <title>CINEMARK</title>
+
+</head>
+
+<body background= "http://127.0.0.1:8000/static/img/fondo6.jpg">
+{% include 'messages.html' %}
+
+{% block header %}    {% endblock %}
+<div id="container">
+    {% block content %}   {% endblock %}
+</div>
+{% block footer %}    {% endblock %}
+
+<div id="modal" class="modal fade">
+    <div id="dialog" class="modal-dialog" hx-target="this"></div>
+    {# Insert HTML here #}
+</div>
+
+{#{% load static %}#}
+{#<script src="{% static 'dist/js/htmx.min.js' %}" defer></script>#}
+<script src="https://unpkg.com/htmx.org@1.8.5"></script>
+{% django_htmx_script %}
+{# or however you include htmx #}
+{% load static %}
+<script src="{% static 'dist/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'dist/js/dialog.js' %}"></script>
+{% load static %}
+<script>
+    document.body.addEventListener('htmx:configRequest', (event) => {
+        event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+    })
+</script>
+
+</body>
+
+</html>

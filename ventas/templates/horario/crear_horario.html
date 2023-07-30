@@ -1,0 +1,13 @@
+{% extends "menu.html" %}
+
+{% block contenido %} <h1>HORARIO</h1>
+
+     <h1> PANTALLA DE HORARIOS </h1>
+
+     <form method = "post">
+         {% csrf_token %}
+           {{ form }}
+         <button type="submit" class="btn-primary" > Guardar Horario </button>
+     </form>
+
+{% endblock %}

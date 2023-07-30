@@ -1,0 +1,14 @@
+{% extends "menu.html" %}
+
+{% block contenido %} <h1>CATEGORIAS</h1>
+
+    <h1> PANTALLA DE CATEGORIA </h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+
+        <button type="submit" class="btn-primary"> Guardar categoria</button>
+    </form>
+
+{% endblock %}

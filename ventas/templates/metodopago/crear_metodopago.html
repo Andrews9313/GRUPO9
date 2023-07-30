@@ -1,0 +1,14 @@
+{% extends "menu.html" %}
+
+{% block contenido %} <h1>METODO DE PAGO</h1>
+
+     <h1> PANTALLA DE METODO DE PAGO </h1>
+
+     <form method="post">
+         {% csrf_token %}
+           {{ form }}
+         <button type="submit" class="btn-primary" > Guardar Metodo de Pago </button>
+
+     </form>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "menu.html" %}
+
+{% block contenido %} <h1>PRESENTACION</h1>
+
+    <h1 style="color: white">Consultar Presentacion</h1>
+    <a href="{% url 'crear_presentacion' %}"> Registar Nueva Presentacion </a>
+    <div style="margin-top: 20px;">
+        <form method="post" action="{% url 'buscar_presentacion' %}">
+            {% csrf_token %}
+            {% for element in buscar_presentacion %}
+                <div>
+                    <label>{{ element.label_tag }}</label>
+                    {{ element }}
+                </div>
+            {% endfor %}
+            <div>
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <button type="submit" formaction="{% url 'exportar_lista_presentacion' %}" class="btn btn-primary">Exportar a PDF
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div style="margin-top: 20px;">
+
+        <table class="table table-dark table-striped table-bordered table-hover">
+            <thead>
+            <th> Fecha</th>
+            <th> Ticket</th>
+            <th> Unidad</th>
+            <th> Modificar</th>
+            <th> Eliminar</th>
+            </thead>
+            <tbody>
+            {% for presentacion in lista_presentaciones %}
+                <tr>
+                    <td> {{ presentacion.fecha_creacion | date }}</td>
+                    <td> {{ presentacion.ticket }}</td>
+                    <td> {{ presentacion.unidad }}</td>
+                    <td><a href="{% url 'modificar_presentacion' presentacion.id %}" class="btn btn-primary" > mod </a></td>
+                    <td><a href="{% url 'eliminar_presentacion' presentacion.id %}" class="btn btn-danger" > eli </a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+{% endblock %}

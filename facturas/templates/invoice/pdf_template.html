@@ -1,0 +1,224 @@
+<!DOCTYPE html>{% load static%}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Cinemark</title>
+    <link rel="stylesheet" href="{%static 'css/invoice-template-1.css' %}" media="all" />
+  </head>
+
+  <head>
+  <style>
+
+		 body {
+
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 20px;
+		}
+
+		header {
+
+			border-bottom: 1px solid #740d16;
+			height: 116px;
+			padding: 10px;
+			width: 100%;
+		}
+
+		#logo {
+			float: left;
+			margin-right: 20px;
+			width: 134px;
+			height: 116px;
+		}
+
+		#logo img {
+			display: block;
+			height: 100%;
+			margin: 0 auto;
+			width: auto;
+		}
+
+		#company {
+			float: left;
+			font-size: 1.5em;
+			margin-top: 20px;
+		}
+
+		#company h1 {
+            color: red;
+			font-size: 1.5em;
+			margin: 0;
+		}
+
+		#company div {
+			margin-bottom: 5px;
+		}
+
+		#details {
+			background-color: paleturquoise;
+			border-bottom: 1px solid #740d16;
+			clear: both;
+			margin-bottom: 50px;
+			padding: 10px;
+			width: 100%;
+		}
+
+		#client {
+			float: left;
+			font-size: 1.2em;
+			margin-top: 20px;
+			width: 50%;
+		}
+
+		#invoice {
+			float: right;
+			text-align: right;
+			font-size: 1.2em;
+			margin-top: 20px;
+			width: 50%;
+		}
+
+		table {
+			border-collapse: collapse;
+			margin: 0 auto;
+			width: 80%;
+		}
+
+		table th,
+		table td {
+			border: 1px solid paleturquoise;
+			padding: 10px;
+			text-align: center;
+			vertical-align: middle;
+		}
+
+		table th {
+			background-color: paleturquoise;
+		}
+
+		table tfoot td {
+			background-color: paleturquoise;
+			font-weight: bold;
+			text-align: right;
+		}
+
+		#thanks {
+			background-color: paleturquoise;
+			border-bottom: 1px solid #740d16;
+			clear: both;
+			font-size: 1.2em;
+			margin-top: 50px;
+			padding: 10px;
+			text-align: center;
+			width: 100%;
+		}
+
+		#notices {
+			background-color: paleturquoise;
+			border-bottom: 1px solid #740d16;
+			clear: both;
+			padding: 10px;
+			width: 100%;
+		}
+
+		#notices div {
+			margin-bottom: 5px;
+		}
+
+		.notice {
+			font-size: 1.2em;
+			color: red;
+			font-weight: bold;
+		}
+
+		footer {
+			background-color: paleturquoise;
+			border-top: 1px solid red;
+			font-size: 0.8em;
+			padding: 10px;
+			text-align: center;
+			width: 100%;
+		}
+  </style>
+</head>
+
+
+  <body>
+    <header class="clearfix">
+      <div id="logo">
+        <img src="{% static 'img/cine.png'%}" style="width: 134px; height:116px">
+      </div>
+      <div id="company">
+        <h1 class="name">{{company.name}}</h1>
+        <div>{{company.address}}</div>
+        <div>{{company.phone}}</div>
+        <div><a href="mailto:{{company.email}}">{{company.email}}</a></div>
+      </div>
+      </div>
+    </header>
+    <main>
+      <div id="details" class="clearfix">
+        <div id="client">
+          <div style="color:red" class="to">Datos del Cliente:</div>
+          <h2 class="name">{{customer}}</h2>
+          <div class="address">{{billing_address}}</div>
+          <div class="email"><a href="mailto:{{customer_email}}">{{customer_email}}</a></div>
+        </div>
+        <div id="invoice">
+          <h1>#{{invoice_id}}</h1>
+          <div class="date">Fecha: {{date}}</div>
+          <div class="date">Fecha de vencimiento: {{due_date}}</div>
+        </div>
+      </div>
+      <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th class="no">#</th>
+            <th class="desc">Producto </th>
+            <th class="desc">Presentación </th>
+            <th class="unit">Cantidad</th>
+            <th class="qty">Precio</th>
+            <th class="total">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+			{% for item in lineitem %}
+          <tr>
+            <td class="no">{{forloop.counter}}</td>
+            <td class="desc">{{item.service}}</td>
+            <td class="desc">{{item.description}}</td>
+            <td class="qty">{{item.quantity}}</td>
+            <td class="unit">${{item.rate}}</td>
+            <td class="total">${{item.amount}}</td>
+		  </tr>
+		  {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2">SUBTOTAL</td>
+            <td>${{invoice_total}}</td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2">Impuesto 0%</td>
+            <td>${{invoice_total}}</td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2">TOTAL</td>
+            <td>${{invoice_total}}</td>
+          </tr>
+        </tfoot>
+      </table>
+      <div id="thanks">GRACIAS!</div>
+      <div id="notices">
+        <div>AVISO:</div>
+        <div class="notice">Se realizará un cargo por financiamiento del 1,5% sobre los saldos impagos después de 30 días. </div>
+      </div>
+    </main>
+    <footer>
+      La factura se creó en una computadora y es válida sin la firma y el sello.
+    </footer>
+  </body>
+</html>

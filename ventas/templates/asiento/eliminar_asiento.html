@@ -1,0 +1,14 @@
+{% extends "menu.html" %}
+
+{% block contenido %}
+
+     <h1> PANTALLA DE ASIENTOS </h1>
+
+     <form method="post">
+         {% csrf_token %}
+           {{ form }}
+         <button type="submit" class="btn-primary" > Guardar asiento </button>
+
+     </form>
+
+{% endblock %}

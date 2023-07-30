@@ -1,0 +1,13 @@
+{% extends "menu.html" %}
+
+{% block contenido %} <h1>NUMERO DE TICKET</h1>
+
+     <h1> PANTALLA DE TICKETS </h1>
+
+     <form method="post">
+         {% csrf_token %}
+           {{ form }}
+         <button type="submit" class="btn-primary" > Guardar Ticket </button>
+     </form>
+
+{% endblock %}

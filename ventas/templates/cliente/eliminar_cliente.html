@@ -1,0 +1,42 @@
+{% extends 'menu.html' %}
+
+{% block contenido %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form }}
+
+        <button type="submit" class="btn btn-danger"> Eliminar cliente</button>
+
+    </form>
+
+{% endblock %}
+
+{#{% extends 'menu.html' %}#}
+{##}
+{#{% block contenido %}#}
+{##}
+{##}
+{#    <div class="container">#}
+{#        <div class="row justify-content-center">#}
+{#            <div class="col-8">#}
+{#                <h2 class="mt-2 text-center"> Eliminar Cliente </h2>#}
+                {#                 <h2 class="card-title text-center"> Crear Persona </h2>#}
+{#                <hr class="mt-0 mb-4">#}
+{##}
+{#                <form method="POST" class="form-control form-control-sm">#}
+{#                    {% csrf_token %}#}
+{#                    {{ clienteform }}#}
+{##}
+{#                    <input type="submit" value="Eliminar Cliente" class="btn-primary"/>#}
+{##}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{##}
+{##}
+{##}
+{#{% endblock %}#}

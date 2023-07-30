@@ -1,0 +1,38 @@
+{#{% extends "menu.html" %}#}
+{##}
+{#{% block contenido %} <h1>CLIENTES</h1>#}
+{##}
+{#    <h1> PANTALLA DE CLIENTES </h1>#}
+{##}
+{#    <form method="post">#}
+{#        {% csrf_token %}#}
+{#        {{ form }}#}
+{##}
+{#        <button type="submit" class="btn-primary"> Guardar cliente</button>#}
+{#    </form>#}
+{##}
+{#{% endblock %}#}
+
+{% extends 'menu.html' %}
+
+{% load static %}
+
+{% block contenido %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <h2 class="mt-2 text-center">Crear Cliente</h2>
+
+                <hr class="mt-0 mb-4">
+                <form method="post">
+                    {% csrf_token %}
+
+                    {{ clienteForm }}
+<input type="submit" value="Guardar Datos" class="btn-secondary"/>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

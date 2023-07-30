@@ -1,0 +1,207 @@
+{% extends "menu.html" %}
+
+{% block contenido%}
+    <h1 style="color: white">Consultar Cliente</h1>
+<a href="{% url 'crear_cliente' %}"> Registar Nuevo Cliente </a>
+
+<div style="margin-top: 20px;">
+    <form method="post" action="{% url 'buscar_cliente' %}">
+        {% csrf_token %}
+        {% for element in buscar_clientes %}
+            <div>
+                <label>{{ element.label_tag }}</label>
+                {{ element }}
+            </div>
+        {% endfor %}
+        <div>
+            <button type="submit" class="btn btn-secondary">Buscar</button>
+            <button type="submit" formaction="{% url 'exportar_lista_cliente' %}" class="btn btn-secondary">Exportar a PDF</button>
+        </div>
+    </form>
+</div>
+
+<div style="margin-top: 20px;">
+    <table class="table table-dark table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Direccion</th>
+                <th>Email</th>
+                <th>Estado</th>
+                <th>Modificar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in lista_clientes %}
+                <tr>
+                    <td>{{ cliente.fecha_creacion | date }}</td>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.apellido }}</td>
+                    <td>{{ cliente.billing_address }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.estado }}</td>
+                    <td><a href="{% url 'modificar_cliente' cliente.id %}" class="btn btn-primary">Mod</a></td>
+                    <td><a href="{% url 'eliminar_cliente' cliente.id %}" class="btn btn-danger">Eli</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    th, td {
+        text-align: center;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    th {
+        background-color: #343a40;
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+    }
+
+    td {
+        padding: 10px;
+    }
+
+    .btn {
+        margin-right: 10px;
+    }
+
+
+</style>
+
+{% endblock %}
+
+
+
+
+
+
+{#{% extends "menu.html" %}#}
+{##}
+{#{% block contenido %} <h1>CLIENTES</h1>#}
+{##}
+{#    <br>#}
+{#    <h1 style="color: white">Consultar Cliente</h1>#}
+{#    <a href="{% url 'crear_cliente' %}"> Crear Cliente </a>#}
+{##}
+{#    <div style="margin-top: 20px;">#}
+{#        <form method="post" action="{% url 'buscar_cliente' %}">#}
+{#            {% csrf_token %}#}
+{#            {% for element in buscar_clientes %}#}
+{#                <div>#}
+{#                    <label>{{ element.label_tag }}</label>#}
+{#                    {{ element }}#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#            <div>#}
+{#                <button type="submit" class="btn btn-primary">Buscar</button>#}
+{#                <button type="submit" formaction="{% url 'exportar_lista_cliente' %}" class="btn btn-primary">Exportar a#}
+{#                    PDF#}
+{#                </button>#}
+{#            </div>#}
+{#        </form>#}
+{#    </div>#}
+
+{#    <table>#}
+{#        <thead>#}
+{#        <th> Buscar Cliente</th>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        <tr>#}
+{##}
+{#            <form method="post" action="{% url 'buscar_cliente' %}">#}
+{#                {% csrf_token %}#}
+{#                {% for element in buscar_cliente %}#}
+{#                    <td>{{ element.label_tag }}</td>#}
+{#                    <td>{{ element }}</td>#}
+{#                {% endfor %}#}
+{##}
+{#                <td>#}
+{#                    <button type="submit" class="btn-primary"> Buscar</button>#}
+{#                </td>#}
+{#            </form>#}
+{#        </tr>#}
+{#        <tr>#}
+{##}
+{#            <form method="post" action="{% url 'exportar_lista_cliente' %}">#}
+{#                {% csrf_token %}#}
+{#                {% for element in buscar_cliente %}#}
+{#                    <td>{{ element.label_tag }}</td>#}
+{#                    <td>{{ element }}</td>#}
+{#                {% endfor %}#}
+{##}
+{#                <td>#}
+{#                    <button type="submit" class="btn-primary"> Exportar a PDF</button>#}
+{#                </td>#}
+{#            </form>#}
+{#        </tr>#}
+{#        </tbody>#}
+{#    </table>#}
+{#    <div style="margin-top: 20px;">#}
+{#        <table class="table table-dark table-striped table-bordered table-hover">#}
+{#            <thead>#}
+{#            <th> Fecha</th>#}
+{#            <th> Nombre</th>#}
+{#            <th> Apellido</th>#}
+{#            <th> Email</th>#}
+{#            <th> Direccion</th>#}
+{#            <th> Modificar</th>#}
+{#            <th> Eliminar</th>#}
+{#            </thead>#}
+{#            <tbody>#}
+{#            {% for cliente in lista_clientes %}#}
+{#                <tr>#}
+{#                    <td> {{ cliente.fecha_creacion | date }}</td>#}
+{#                    <td> {{ cliente.nombre }}</td>#}
+{#                    <td> {{ cliente.apellido }}</td>#}
+{#                    <td> {{ cliente.email }}</td>#}
+{#                    <td> {{ cliente.billing_address }}</td>#}
+{#                    <td><a href="{% url 'modificar_cliente' cliente.id %}"> mod </a></td>#}
+{#                    <td><a href="{% url 'eliminar_cliente' cliente.id %}"> elim </a></td>#}
+{#                </tr>#}
+{#            {% endfor %}#}
+{#            </tbody>#}
+{#        </table>#}
+{#    </div>#}
+{##}
+{#    <style>#}
+{#        th, td {#}
+{#            text-align: center;#}
+{#        }#}
+{##}
+{#        table {#}
+{#            border-collapse: collapse;#}
+{#            width: 100%;#}
+{#            margin-top: 20px;#}
+{#        }#}
+{##}
+{#        th {#}
+{#            background-color: #343a40;#}
+{#            color: white;#}
+{#            font-weight: bold;#}
+{#            padding: 10px;#}
+{#        }#}
+{##}
+{#        td {#}
+{#            padding: 10px;#}
+{#        }#}
+{##}
+{#        .btn {#}
+{#            margin-right: 10px;#}
+{#        }#}
+{##}
+{##}
+{#    </style>#}
+{##}
+{#{% endblock %}#}

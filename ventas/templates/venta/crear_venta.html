@@ -1,0 +1,13 @@
+{% extends "menu.html" %}
+
+{% block contenido %} <h1>VENTA</h1>
+
+     <h1> PANTALLA DE VENTAS </h1>
+
+     <form method="post">
+         {% csrf_token %}
+           {{ form }}
+         <button type="submit" class="btn-primary" > Guardar venta </button>
+     </form>
+
+{% endblock %}

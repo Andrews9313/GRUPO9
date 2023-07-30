@@ -1,0 +1,9 @@
+{% for producto in lista_tickets %}
+    <tr>
+        <td> {{ producto.fecha_creacion | date }} </td>
+        <td> {{ ticket.numticket }} </td>
+        <td> {{ ticket.estado }}     </td>
+
+
+    </tr>
+{% endfor %}
